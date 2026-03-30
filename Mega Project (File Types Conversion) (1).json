@@ -1,0 +1,1290 @@
+{
+  "name": "Mega Project (File Types Conversion)",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload File",
+        "formDescription": "Convert Files",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "file",
+              "fieldType": "file"
+            },
+            {
+              "fieldLabel": "Convert TO",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "docx"
+                  },
+                  {
+                    "option": "csv"
+                  },
+                  {
+                    "option": "txt"
+                  },
+                  {
+                    "option": "pdf"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -624,
+        -384
+      ],
+      "id": "492e37e1-fa90-4c9c-8d3e-cc679f6e6028",
+      "name": "On form submission",
+      "webhookId": "ed405aca-3e5b-44af-92ab-7e1c7047567f"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "={{$binary.file.fileName.replace('.xlsx','.pdf')}}",
+        "name": "={{$binary.file.fileName.replace('.xlsx','.pdf')}}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        -672
+      ],
+      "id": "082984c6-2688-49ee-a80a-5a5e238c78fb",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lelSXl0s2CKU0wM5",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7L0bGLZeUv7bDB",
+          "mode": "list",
+          "cachedResultName": "My First Table",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRYiuXvc8NkOXFn",
+          "mode": "list",
+          "cachedResultName": "Table 9",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB/tblRYiuXvc8NkOXFn"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Download Link": "={{ $json.webViewLink }}",
+            "File Name": "={{ $('On form submission').item.json.file[0].filename }}",
+            "Convert To ": "Pdf"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "File Name",
+              "displayName": "File Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Convert To ",
+              "displayName": "Convert To ",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Download Link",
+              "displayName": "Download Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        -672
+      ],
+      "id": "3eff4845-5804-4ea3-877f-7bc29a30e275",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gSKUssWTeFFetjDk",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "={{$binary.file.fileName.replace('.csv','.pdf')}}",
+        "name": "={{$binary.file.fileName.replace('.csv','.pdf')}}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        -480
+      ],
+      "id": "dfbd077b-fc1c-4562-8807-4b160bc2156b",
+      "name": "Upload file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lelSXl0s2CKU0wM5",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7L0bGLZeUv7bDB",
+          "mode": "list",
+          "cachedResultName": "My First Table",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRYiuXvc8NkOXFn",
+          "mode": "list",
+          "cachedResultName": "Table 9",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB/tblRYiuXvc8NkOXFn"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Download Link": "={{ $json.webViewLink }}",
+            "File Name": "={{ $('On form submission').item.json.file[0].filename }}",
+            "Convert To ": "Pdf"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "File Name",
+              "displayName": "File Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Convert To ",
+              "displayName": "Convert To ",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Download Link",
+              "displayName": "Download Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        -480
+      ],
+      "id": "5dd070c3-4598-4ec7-9efb-a4e8c6858a78",
+      "name": "Create a record1",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gSKUssWTeFFetjDk",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "={{$binary.file.fileName.replace('.docx','.pdf')}}",
+        "name": "={{$binary.file.fileName.replace('.docx','.pdf')}}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        -288
+      ],
+      "id": "0d8fde6a-eb7f-40c3-bc51-b1c10ad50b18",
+      "name": "Upload file2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lelSXl0s2CKU0wM5",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7L0bGLZeUv7bDB",
+          "mode": "list",
+          "cachedResultName": "My First Table",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRYiuXvc8NkOXFn",
+          "mode": "list",
+          "cachedResultName": "Table 9",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB/tblRYiuXvc8NkOXFn"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Download Link": "={{ $json.webViewLink }}",
+            "File Name": "={{ $('On form submission').item.json.file[0].filename }}",
+            "Convert To ": "Pdf"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "File Name",
+              "displayName": "File Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Convert To ",
+              "displayName": "Convert To ",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Download Link",
+              "displayName": "Download Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        -288
+      ],
+      "id": "c2613dcd-4170-4949-afa6-19bcf04b4659",
+      "name": "Create a record2",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gSKUssWTeFFetjDk",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cloudmersive.com/convert/csv/to/pdf",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Apikey",
+              "value": "c1cceae1-a98f-441b-b903-5bcf56c1772a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "inputfile",
+              "inputDataFieldName": "file"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "file",
+              "outputPropertyName": "={{$binary.file.fileName.replace('.csv','.pdf')}}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        48,
+        -480
+      ],
+      "id": "a8acc4c7-6a31-487d-bde3-c6c22575fd78",
+      "name": "CSV TO PDF"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cloudmersive.com/convert/xlsx/to/pdf",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Apikey",
+              "value": "c1cceae1-a98f-441b-b903-5bcf56c1772a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "inputfile",
+              "inputDataFieldName": "file"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "={{$binary.file.fileName.replace('.xlsx','.pdf')}}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        48,
+        -672
+      ],
+      "id": "d88d2202-d030-4c36-b7fa-643c38c81f6f",
+      "name": "XLSX To PDF"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cloudmersive.com/convert/docx/to/pdf",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Apikey",
+              "value": "c1cceae1-a98f-441b-b903-5bcf56c1772a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "inputfile",
+              "inputDataFieldName": "file"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "file",
+              "outputPropertyName": "={{$binary.file.fileName.replace('.docx','.pdf')}}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        48,
+        -288
+      ],
+      "id": "e6b98ea6-8f2c-416d-8577-fdcd081d0926",
+      "name": "DOCX To PDF"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "={{$binary.file.fileName.replace('.pdf','.docx')}}",
+        "name": "={{$binary.file.fileName.replace('.pdf','.docs')}}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        -96
+      ],
+      "id": "7c0c60c7-be31-4c60-9fab-c00926176c28",
+      "name": "Upload file3",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lelSXl0s2CKU0wM5",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7L0bGLZeUv7bDB",
+          "mode": "list",
+          "cachedResultName": "My First Table",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRYiuXvc8NkOXFn",
+          "mode": "list",
+          "cachedResultName": "Table 9",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB/tblRYiuXvc8NkOXFn"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Download Link": "={{ $json.webViewLink }}",
+            "File Name": "={{ $('On form submission').item.json.file[0].filename }}",
+            "Convert To ": "DOCX"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "File Name",
+              "displayName": "File Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Convert To ",
+              "displayName": "Convert To ",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Download Link",
+              "displayName": "Download Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        -96
+      ],
+      "id": "0dab9529-0aa0-4f36-963a-810afad9b40e",
+      "name": "Create a record3",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gSKUssWTeFFetjDk",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cloudmersive.com/convert/pdf/to/docx",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Apikey",
+              "value": "c1cceae1-a98f-441b-b903-5bcf56c1772a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "inputfile",
+              "inputDataFieldName": "file"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "file",
+              "outputPropertyName": "={{$binary.file.fileName.replace('.pdf','.docx')}}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        48,
+        -96
+      ],
+      "id": "b44433f0-35a7-44c7-80c8-81adec768627",
+      "name": "PDF To DOCX"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.ultramsg.com/instance167716/messages/chat?token=k31q6vbmyvat0sxg&to=+923156814200&body=WhatsApp+API+on+UltraMsg.com+works+good&priority=10",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "body",
+              "value": "=Your link : \n{{ $json.fields['Download Link'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        992,
+        -352
+      ],
+      "id": "51786b08-d545-40b5-9087-34af1ea3e5d1",
+      "name": "Whatsapp Sender (Ultramsg)"
+    },
+    {
+      "parameters": {
+        "numberInputs": 5
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        800,
+        -400
+      ],
+      "id": "ecc72e7a-3ed0-4b41-951e-613be592f7b0",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.file[0].mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}",
+                    "rightValue": "={{ $json.file[0].filename }}",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "51ced899-d849-4ddb-af80-019934f9ca32"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f40023da-2dfe-4714-a443-1396bf864d7b",
+                    "leftValue": "={{ $json.file[0].mimetype === 'text/csv' }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4bf4004f-cc02-4340-b4d7-028eeb8ad266",
+                    "leftValue": "={{ $json.file[0].mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }}",
+                    "rightValue": "={{$(docx) }}",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "446f414d-7f6e-41e7-9020-57e73ea06e6e",
+                    "leftValue": "={{ $json.file[0].mimetype === 'application/pdf' }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        -416
+      ],
+      "id": "c551ec76-ae4a-4aaf-bdda-544f4fc7a73b",
+      "name": "Pathways"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['Convert TO'] }}",
+                    "rightValue": "docx",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "618abbd3-a030-401f-8a55-c1e3ecaa9a49"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8e79a0bb-a112-42fe-a365-a9ad6042fa57",
+                    "leftValue": "={{ $('On form submission').item.json['Convert TO'] }}",
+                    "rightValue": "txt",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        0
+      ],
+      "id": "31f98cb3-c5a3-4c38-a5c9-40d2c235fbee",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "={{$binary.file.fileName.replace('.pdf','.txt')}}",
+        "name": "={{$binary.file.fileName.replace('.pdf','.txt')}}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        96
+      ],
+      "id": "1b3b30e3-2f22-4b77-b7f5-5d930b0cf175",
+      "name": "Upload file4",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "lelSXl0s2CKU0wM5",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7L0bGLZeUv7bDB",
+          "mode": "list",
+          "cachedResultName": "My First Table",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRYiuXvc8NkOXFn",
+          "mode": "list",
+          "cachedResultName": "Table 9",
+          "cachedResultUrl": "https://airtable.com/app7L0bGLZeUv7bDB/tblRYiuXvc8NkOXFn"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Download Link": "={{ $json.webViewLink }}",
+            "File Name": "={{ $('On form submission').item.json.file[0].filename }}",
+            "Convert To ": "DOCX"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "File Name",
+              "displayName": "File Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Convert To ",
+              "displayName": "Convert To ",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Download Link",
+              "displayName": "Download Link",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        96
+      ],
+      "id": "57c1f7a6-7d86-49a2-a852-2ca98c9844ee",
+      "name": "Create a record4",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "gSKUssWTeFFetjDk",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cloudmersive.com/convert/pdf/to/txt",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Apikey",
+              "value": "c1cceae1-a98f-441b-b903-5bcf56c1772a"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "inputfile",
+              "inputDataFieldName": "file"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "file",
+              "outputPropertyName": "={{$binary.file.fileName.replace('.pdf','.txt')}}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        48,
+        96
+      ],
+      "id": "ffe23f1f-ad60-40c5-90ef-8964b7748510",
+      "name": "PDF To TXT"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Pathways",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file1": {
+      "main": [
+        [
+          {
+            "node": "Create a record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file2": {
+      "main": [
+        [
+          {
+            "node": "Create a record2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CSV TO PDF": {
+      "main": [
+        [
+          {
+            "node": "Upload file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XLSX To PDF": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DOCX To PDF": {
+      "main": [
+        [
+          {
+            "node": "Upload file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file3": {
+      "main": [
+        [
+          {
+            "node": "Create a record3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDF To DOCX": {
+      "main": [
+        [
+          {
+            "node": "Upload file3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Create a record2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Whatsapp Sender (Ultramsg)": {
+      "main": [
+        []
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Whatsapp Sender (Ultramsg)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pathways": {
+      "main": [
+        [
+          {
+            "node": "XLSX To PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CSV TO PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "DOCX To PDF",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "PDF To DOCX",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "PDF To TXT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file4": {
+      "main": [
+        [
+          {
+            "node": "Create a record4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PDF To TXT": {
+      "main": [
+        [
+          {
+            "node": "Upload file4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record4": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "82d2e9a6-2760-4477-a1ba-80525fa61369",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0454814d4ab80855dcb2d4b2f2a396f7cea09e6f9d717e8d8181e3bbb14a19a5"
+  },
+  "id": "yVaMbfwVXmKa0CSZ",
+  "tags": []
+}
